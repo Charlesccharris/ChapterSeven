@@ -19,10 +19,64 @@ class Homework7_21{
 	LLRLLRR;
 	RRLLLLL;
 	LRLRRLR;
-	O;
-	O;
-	OOO
+	   O;
+	   O;
+	  OOO
 */
-	System.out.println("Hello");
+	String finalBoard = "";
+	String[] nailBoard = new String[8];
+
+	fillArray(nailBoard);
+
+	hitNail(nailBoard);
+
+	finalBoard = printArray(nailBoard, finalBoard);
+	hitNail(nailBoard);
+
+	finalBoard = printArray(nailBoard, finalBoard);
+
+	System.out.print(finalBoard);
 	}
+
+	public static void fillArray(String[] array){
+
+		for(int count = 0; count < array.length; count++){
+			array[count] = " ";
+		}
+
+	}
+	public static void hitNail(String[] nailBoard){
+	int selection = 0;
+
+	String nailList = "";
+		for(int count = 0; count < 8; count++){
+			double direction = (double)(Math.random());
+			if(direction >= .5){
+				nailList += "R";
+				selection += 1;
+			}
+			else{
+				nailList += "L";
+			}
+		}
+	System.out.println(nailList);
+	nailBoard[selection] += "O";
+
+	}
+
+/*	public static void printArray(int[] array){
+
+		for(int print : array);
+			System.out.printf("%.0f ", print);
+		System.out.println("");
+	}
+*/
+        public static String printArray(String[] list, String finalBoard){
+
+                for(int value = 0; value < list.length; value++){
+                        finalBoard += list[value];
+		}
+                finalBoard += "\n";
+	return finalBoard;
+        }
 }
