@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class Homework7_21{
 	public static void main(String[] args){
 	/*(Game: bean machine)
@@ -23,60 +25,85 @@ class Homework7_21{
 	   O;
 	  OOO
 */
+	Scanner input = new Scanner(System.in);
 	String finalBoard = "";
-	String[] nailBoard = new String[8];
+	System.out.print("Enter the number of slots: ");
+	int numberOfSlots = input.nextInt();
+
+	System.out.print("\nEnter the number of balls: ");
+	int numberOfBalls = input.nextInt();
+
+	int[] nailBoard = new int[numberOfSlots];
 
 	fillArray(nailBoard);
 
-	hitNail(nailBoard);
+	hitNail(nailBoard, numberOfBalls);
 
-	finalBoard = printArray(nailBoard, finalBoard);
-	hitNail(nailBoard);
-
-	finalBoard = printArray(nailBoard, finalBoard);
+	finalBoard = printArray(nailBoard, finalBoard, numberOfBalls);
 
 	System.out.print(finalBoard);
 	}
 
-	public static void fillArray(String[] array){
+	public static void fillArray(int[] array){
 
 		for(int count = 0; count < array.length; count++){
-			array[count] = " ";
+			array[count] = 0;
 		}
 
 	}
-	public static void hitNail(String[] nailBoard){
-	int selection = 0;
+	public static void hitNail(int[] array, int numberOfBalls){
 
-	String nailList = "";
-		for(int count = 0; count < 8; count++){
-			double direction = (double)(Math.random());
-			if(direction >= .5){
-				nailList += "R";
-				selection += 1;
+
+		for(int balls = 0; balls < numberOfBalls; balls++){
+			String nailList = "";
+			int selection = 0;
+			for(int count = 0; count < array.length - 1; count++){
+				double direction = (double)(Math.random());
+				if(direction >= .5){
+					nailList += "R";
+					selection += 1;
+				}
+				else{
+					nailList += "L";
+					selection += 0;
+				}
 			}
-			else{
-				nailList += "L";
-			}
+		if(numberOfBalls < 10)
+			System.out.println(nailList);
+		array[selection]++;
 		}
-	System.out.println(nailList);
-	nailBoard[selection] += "O";
-
 	}
 
-/*	public static void printArray(int[] array){
+        public static String printArray(int[] list, String finalBoard, int numberOfBalls){
+/*	    String[] ball = new String[9];
+    		for (int i = 1; i > 0; i--) {
+        		for (int j = 0; j <= 8; j++) {
+            			if (i == list[j]) {
+                			ball[j] = "O";
+                			list[j]--;
+            			}
+				else
+                			ball[j] = " ";
+            			System.out.print(ball[j]);
+        		}
+        	System.out.println();
+    		}
 
-		for(int print : array);
-			System.out.printf("%.0f ", print);
-		System.out.println("");
-	}
+	return finalBoard;
 */
-        public static String printArray(String[] list, String finalBoard){
-
+	for(int times = numberOfBalls; times > 0; times--){
                 for(int value = 0; value < list.length; value++){
-                        finalBoard += list[value];
+				if(list[value] == times){
+					finalBoard += "O";
+					list[value] -= 1;
+				}
+				else if(list[value] != times)
+					finalBoard += " ";
 		}
                 finalBoard += "\n";
+	}
 	return finalBoard;
-        }
+
+
+	}
 }
