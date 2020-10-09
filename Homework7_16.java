@@ -45,13 +45,13 @@ class Homework7_16{
 
 	public static int[] createArray(){
 
-		int[] bigArray = new int[100_000];
+		int[] array = new int[100_000];
 
-		for(int count = 0; count < bigArray.length; count++){
-			bigArray[count] = (int)(Math.random()*10000);
+		for(int count = 0; count < array.length; count++){
+			array[count] = (int)(Math.random()*10000);
 		}
 
-	return bigArray;
+	return array;
 
 	}
 
