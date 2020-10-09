@@ -15,9 +15,9 @@ class Homework7_18{
 	double[] list = createList(input);
 //	double[] list = {1.3, 5.7, 90, 9.2, 5.6, 30.1, 63.4, 9, 8.01, 8.02};
 	getList(list, input);
-	System.out.print("The original order is: ");
-
+	System.out.print("\nThe original order is: ");
 	displayOrder(list);
+
 	bubbleSort(list);
 	System.out.print("The sorted order is: ");
 	displayOrder(list);
@@ -41,33 +41,29 @@ class Homework7_18{
 	}
 
 	public static void bubbleSort(double[] list){
-	int number1;
-	int number2;
 	double temp;
+	boolean outOfOrder = true;
+
 	int rounds = 0;
 	int totalCount = list.length - 1;
-		while(rounds < list.length){
-			number1 = 0;
-			number2 = 1;
-			for(int count = 0; count < totalCount; count++, number1++, number2++){
-				if(list[number1] > list[number2]){
-					temp = list[number1];
-					list[number1] = list[number2];
-					list[number2] = temp;
+		while(outOfOrder){
+			outOfOrder = false;
+			for(int count = 0; count < totalCount - rounds; count++){
+				if(list[count] > list[count + 1]){
+					temp = list[count];
+					list[count] = list[count + 1];
+					list[count + 1] = temp;
+					outOfOrder = true;
 				}
-
 			}
-
 			rounds++;
 		}
 	}
 
 	public static void displayOrder(double[] list){
 
-		for(int count = 0; count < list.length; count++){
-			System.out.print(list[count] + ", ");
-		}
+		for(double value : list)
+			System.out.printf(" %.2f", value);
 		System.out.println("");
 	}
-
 }
