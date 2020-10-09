@@ -10,25 +10,36 @@ class Homework7_16{
 	long endTime = System.currentTimeMillis();
 	long executionTime = endTime - startTime;*/
 
-//	long startTime = System.currentTimeMillis();
+	long startTime = System.currentTimeMillis();
 
-//	int[] bigArray = createArray();
-//	int key = (int)(Math.random()*10000);
+	int[] bigArray = createArray();
+	int key = (int)(Math.random()*10000);
 
-	int[] bigArray = {10, 4, 3, 6, 8, 5, 9};
-	int key = 9;
+//	int[] bigArray = {10, 4, 3, 6, 8, 5, 9};
+//	int key = 9;
 
-//	int match = linearSearch(bigArray, key);
-//	long endTime = System.currentTimeMillis();
-//	long executeTime = endTime - startTime;
-
-	selectionSort(bigArray);
+//	printArray(bigArray);
 
 	int match = linearSearch(bigArray, key);
 
+	long endTime = System.currentTimeMillis();
+	long executeTime = endTime - startTime;
+
 	System.out.println("The number we are looking for is: " + key);
 	System.out.println(match + " Was the corrisponding square");
-//	System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
+	System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
+
+	bubbleSort(bigArray);
+
+//	selectionSort(bigArray);
+
+//	printArray(bigArray);
+
+//	match = linearSearch(bigArray, key);
+
+	System.out.println("The number we are looking for is: " + key);
+	System.out.println(match + " Was the corrisponding square");
+	System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
 
 	}
 
@@ -75,4 +86,29 @@ class Homework7_16{
 			System.out.println("Current min is: " + currentMin);
 		}
 	}
+
+	public static void printArray (int[] bigArray){
+		for(double value: bigArray)
+			System.out.printf("%.2f ", value);
+	}
+
+        public static void bubbleSort(int[] list){
+        int temp;
+        boolean outOfOrder = true;
+
+        int rounds = 0;
+        int totalCount = list.length - 1;
+                while(outOfOrder){
+                        outOfOrder = false;
+                        for(int count = 0; count < totalCount - rounds; count++){
+                                if(list[count] > list[count + 1]){
+                                        temp = list[count];
+                                        list[count] = list[count + 1];
+                                        list[count + 1] = temp;
+                                        outOfOrder = true;
+                                }
+                        }
+                        rounds++;
+                }
+        }
 }
