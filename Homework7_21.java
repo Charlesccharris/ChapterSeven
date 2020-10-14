@@ -75,22 +75,6 @@ class Homework7_21{
 	}
 
         public static String printArray(int[] list, String finalBoard, int numberOfBalls){
-/*	    String[] ball = new String[9];
-    		for (int i = 1; i > 0; i--) {
-        		for (int j = 0; j <= 8; j++) {
-            			if (i == list[j]) {
-                			ball[j] = "O";
-                			list[j]--;
-            			}
-				else
-                			ball[j] = " ";
-            			System.out.print(ball[j]);
-        		}
-        	System.out.println();
-    		}
-
-	return finalBoard;
-*/
 	for(int times = numberOfBalls; times > 0; times--){
                 for(int value = 0; value < list.length; value++){
 				if(list[value] == times){
