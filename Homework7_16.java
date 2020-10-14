@@ -1,114 +1,135 @@
 class Homework7_16{
 	public static void main(String[] args){
-	/*(Execution time)
-	Write a program that randomly generates an array of 100,000 integers and a key.
-	Estimate the execution time of invoking the linearSearch method in Listing 7.6.
-	Sort the array and estimate the execution time of invoking the binarySearch method in Listing 7.7.
-	You can use the following code template to obtain the execution time:
-	long startTime = System.currentTimeMillis();
-	perform the task;
-	long endTime = System.currentTimeMillis();
-	long executionTime = endTime - startTime;*/
+		/*(Execution time)
+		Write a program that randomly generates an array of 100,000 integers and a key.
+		Estimate the execution time of invoking the linearSearch method in Listing 7.6.
+		Sort the array and estimate the execution time of invoking the binarySearch method in Listing 7.7.
+		You can use the following code template to obtain the execution time:
+		long startTime = System.currentTimeMillis();
+		perform the task;
+		long endTime = System.currentTimeMillis();
+		long executionTime = endTime - startTime;*/
 
-	long startTime = System.currentTimeMillis();
+		int[] bigArray = createArray();
+		int key = createKey();
 
-	int[] bigArray = createArray();
-	int key = (int)(Math.random()*10000);
+//		int[] bigArray = {10, 9, 3, 6, 8, 5, 8, 5, 7, 8, 1, 2, 4, 6, 1, 0, 6};
+//		int key = 9;
 
-//	int[] bigArray = {10, 4, 3, 6, 8, 5, 9};
-//	int key = 9;
+		timedLS(bigArray, key);
 
-//	printArray(bigArray);
+		timedSort(bigArray);
 
-	int match = linearSearch(bigArray, key);
-
-	long endTime = System.currentTimeMillis();
-	long executeTime = endTime - startTime;
-
-	System.out.println("The number we are looking for is: " + key);
-	System.out.println(match + " Was the corrisponding square");
-	System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
-
-	bubbleSort(bigArray);
-
-//	selectionSort(bigArray);
-
-//	printArray(bigArray);
-
-//	match = linearSearch(bigArray, key);
-
-	System.out.println("The number we are looking for is: " + key);
-	System.out.println(match + " Was the corrisponding square");
-	System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
-
+		timedBinarySearch(bigArray, key);
 	}
 
 	public static int[] createArray(){
-
 		int[] array = new int[100_000];
 
-		for(int count = 0; count < array.length; count++){
-			array[count] = (int)(Math.random()*10000);
-		}
+			for(int count = 0; count < array.length; count++){
+				array[count] = (int)(Math.random()*10000);
+			}
 
-	return array;
-
+		return array;
 	}
 
+	public static int createKey(){
 
-	public static int linearSearch(int[] bigArray, int key){
+		int key = (int)(Math.random()*10000);
+		System.out.println("The key you are looking for is: " + key);
+		return key;
+	}
+
+	public static void timedLS(int[] array, int key){
+
+		long startTime = System.nanoTime();
+		linearSearch(array, key);
+		long endTime = System.nanoTime();
+		long executeTime = endTime - startTime;
+			if(executeTime < 1_000_000){
+				System.out.println("It took " + executeTime + " nanoseconds, for the linear search to find it.");
+			}
+			else if(executeTime > 1_000_000){
+				executeTime /= 1_000_000;
+				System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
+			}
+	}
+
+	public static void linearSearch(int[] array, int key){
 		int count = 0;
-
-
-		for(count = 0; count < bigArray.length; count++){
-			if(key == bigArray[count])
-			return count;
-		}
-
-		return -1;
-	}
-
-	public static void selectionSort(int[] bigArray){
-		for(int count = 0; count < bigArray.length - 1; count++){
-			int currentMin = bigArray[count];
-			int currentMinIndex = count;
-
-			for(int round = count + 1; round < bigArray.length; round++){
-				if(currentMin > bigArray[round]){
-					currentMin = bigArray[count];
-					currentMinIndex = round;
+		boolean lookingForKey = true;
+		while (lookingForKey){
+			for(count = 0; count < array.length; count++){
+				if(key == array[count]){
+					System.out.println("The key is in box " + count);
+					lookingForKey = false;
+					break;
 				}
 			}
-			if(currentMinIndex != count){
-				bigArray[currentMinIndex] = bigArray[count];
-				bigArray[count] = currentMin;
-			}
-			System.out.println("Current min is: " + currentMin);
+			if(lookingForKey)
+				System.out.println("The array didn't contain the key");
 		}
 	}
 
-	public static void printArray (int[] bigArray){
-		for(double value: bigArray)
-			System.out.printf("%.2f ", value);
+	public static void timedSort(int[] array){
+
+		long startTime = System.nanoTime();
+		java.util.Arrays.sort(array);
+		long endTime = System.nanoTime();
+		long executeTime = endTime - startTime;
+			if(executeTime < 1_000_000){
+				System.out.println("It took " + executeTime + " nanoseconds to sort the array.");
+			}
+			else if(executeTime > 1_000_000){
+				executeTime /= 1_000_000;
+				System.out.println("It took " + executeTime + " milliseconds to sort the array.");
+			}
 	}
 
-        public static void bubbleSort(int[] list){
-        int temp;
-        boolean outOfOrder = true;
 
-        int rounds = 0;
-        int totalCount = list.length - 1;
-                while(outOfOrder){
-                        outOfOrder = false;
-                        for(int count = 0; count < totalCount - rounds; count++){
-                                if(list[count] > list[count + 1]){
-                                        temp = list[count];
-                                        list[count] = list[count + 1];
-                                        list[count + 1] = temp;
-                                        outOfOrder = true;
-                                }
-                        }
-                        rounds++;
-                }
-        }
+	public static void timedBinarySearch(int[] array, int key){
+
+		long startTime = System.nanoTime();
+		binarySearch(array, key);
+		long endTime = System.nanoTime();
+		long executeTime = endTime - startTime;
+			if(executeTime < 1_000_000){
+				System.out.println("It took " + executeTime + " nanoseconds, for the binary search to find it.");
+			}
+			else if(executeTime > 1_000_000){
+				executeTime /= 1_000_000;
+				System.out.println("It took " + executeTime + " milliseconds, for the binary search to find it.");
+			}
+	}
+
+
+	public static void binarySearch (int[] array, int key){
+		int max = (array.length - 1);
+		int min = 0;
+		int middle = (max + min)/2;
+		boolean keepGoing = true;
+		int oldMid = 0;
+		while(keepGoing){
+			if(array[middle] > key){
+//				System.out.println("The key is less than the value in box " + middle);
+				oldMid = middle;
+				max = middle;
+				middle = (max + min)/2;
+			}
+			else if(array[middle] < key){
+//				System.out.println("The key is greater than the value in box " + middle);
+				oldMid = middle;
+				min = middle;
+				middle = (max + min)/2;
+			}
+			else if(array[middle] == key){
+				System.out.println("The key is in square: " + middle);
+				keepGoing = false;
+			}
+			if(oldMid == middle){
+				System.out.println("The array didn't contain the key");
+				keepGoing = false;
+			}
+		}
+	}
 }
