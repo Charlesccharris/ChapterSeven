@@ -13,9 +13,6 @@ class Homework7_16{
 		int[] bigArray = createArray();
 		int key = createKey();
 
-//		int[] bigArray = {10, 9, 3, 6, 8, 5, 8, 5, 7, 8, 1, 2, 4, 6, 1, 0, 6};
-//		int key = 9;
-
 		timedLS(bigArray, key);
 
 		timedSort(bigArray);
@@ -26,9 +23,9 @@ class Homework7_16{
 	public static int[] createArray(){
 		int[] array = new int[100_000];
 
-			for(int count = 0; count < array.length; count++){
-				array[count] = (int)(Math.random()*10000);
-			}
+		for(int count = 0; count < array.length; count++){
+			array[count] = (int)(Math.random()*10000);
+		}
 
 		return array;
 	}
@@ -46,13 +43,13 @@ class Homework7_16{
 		linearSearch(array, key);
 		long endTime = System.nanoTime();
 		long executeTime = endTime - startTime;
-			if(executeTime < 1_000_000){
-				System.out.println("It took " + executeTime + " nanoseconds, for the linear search to find it.");
-			}
-			else if(executeTime > 1_000_000){
-				executeTime /= 1_000_000;
-				System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
-			}
+		if(executeTime < 1_000_000){
+			System.out.println("It took " + executeTime + " nanoseconds, for the linear search to find it.");
+		}
+		else if(executeTime > 1_000_000){
+			executeTime /= 1_000_000;
+			System.out.println("It took " + executeTime + " milliseconds, for the linear search to find it.");
+		}
 	}
 
 	public static void linearSearch(int[] array, int key){
@@ -66,8 +63,9 @@ class Homework7_16{
 					break;
 				}
 			}
-			if(lookingForKey)
+			if(lookingForKey){
 				System.out.println("The array didn't contain the key");
+			}
 		}
 	}
 
@@ -77,13 +75,13 @@ class Homework7_16{
 		java.util.Arrays.sort(array);
 		long endTime = System.nanoTime();
 		long executeTime = endTime - startTime;
-			if(executeTime < 1_000_000){
-				System.out.println("It took " + executeTime + " nanoseconds to sort the array.");
-			}
-			else if(executeTime > 1_000_000){
-				executeTime /= 1_000_000;
-				System.out.println("It took " + executeTime + " milliseconds to sort the array.");
-			}
+		if(executeTime < 1_000_000){
+			System.out.println("It took " + executeTime + " nanoseconds to sort the array.");
+		}
+		else if(executeTime > 1_000_000){
+			executeTime /= 1_000_000;
+			System.out.println("It took " + executeTime + " milliseconds to sort the array.");
+		}
 	}
 
 
@@ -93,13 +91,13 @@ class Homework7_16{
 		binarySearch(array, key);
 		long endTime = System.nanoTime();
 		long executeTime = endTime - startTime;
-			if(executeTime < 1_000_000){
-				System.out.println("It took " + executeTime + " nanoseconds, for the binary search to find it.");
-			}
-			else if(executeTime > 1_000_000){
-				executeTime /= 1_000_000;
-				System.out.println("It took " + executeTime + " milliseconds, for the binary search to find it.");
-			}
+		if(executeTime < 1_000_000){
+			System.out.println("It took " + executeTime + " nanoseconds, for the binary search to find it.");
+		}
+		else if(executeTime > 1_000_000){
+			executeTime /= 1_000_000;
+			System.out.println("It took " + executeTime + " milliseconds, for the binary search to find it.");
+		}
 	}
 
 
